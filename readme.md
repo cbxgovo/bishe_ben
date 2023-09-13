@@ -1,5 +1,6 @@
-
 # 部分命令
+
+修改测试 版本测试
 
 版本：0503
 
@@ -19,10 +20,7 @@ python manage.py runserver
 
 首页：http://127.0.0.1:8000/index/
 
-
 ---
-
-
 
 # 一、项目简介
 
@@ -92,8 +90,6 @@ class ultthree(models.Model):
     ult3 = models.CharField(max_length=20,default=0)
     create_time=models.DateTimeField(auto_now=True)
 
-
-
 李新龙数据模式
 
 class pool(models.Model):
@@ -104,8 +100,6 @@ class pool(models.Model):
     qua_air = models.FloatField(max_length=20,default=0.00)
     num_person = models.CharField(max_length=20,default=50)
     create_time=models.DateTimeField(auto_now=True) 
-
-
 
 # 使用
 
