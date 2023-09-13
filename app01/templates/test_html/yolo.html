@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TensorFlow.js Demo</title>
+    <style>
+        #big-box {
+            position: relative;
+        }
+
+        #img-box {
+            position: absolute;
+            top: 0px;
+            left: 0px;
+        }
+
+        #img-box .rect {
+            position: absolute;
+            border: 2px solid #f00;
+            pointer-events: none;
+        }
+
+        #img-box .rect .className {
+            position: absolute;
+            top: 0;
+            /* background: #f00; */
+            color: #fff;
+        }
+
+        #myPlayer {
+            max-width: 600px;
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+
+    <script src="tfjs-m.min.js"></script>
+    <script src="config.js"></script>
+    <script src="yolo-tfjs-m.js"></script>
+
+    <div id="showBox">等待模型载入...</div>
+    <br>
+
+    <div id="big-box">
+        <video id="myPlayer" muted="true" autoplay src="demo01.mp4" controls="" playsinline="" webkit-playsinline="">
+        </video>
+        <!-- 用于展示识别框 -->
+        <div id="img-box">
+
+        </div>
+    </div>
+
+
+    <script>
+
+        var myModel = null;
+        var V = null;
+
+        var requestAnimationFrameIndex = null;
+        var myPlayer = document.getElementById("myPlayer");
+
+        var videoHeight = 0;
+        var videoWidth = 0;
+        var clientHeight = 0;
+        var clientWidth = 0;
+
+        var modelLoad = false;
+        var videoLoad = false;
+
+        var anchors = ANCHORS_TINY;
+        var modelUrl = 'yolov3-tiny/model.json';
+        var modelPromise = tf.loadLayersModel(modelUrl);
+
+        window.onload = function () {
+
+            // 当视频准备好了就准备开始识别吧
+            myPlayer.addEventListener("canplay", function () {
+                videoHeight = myPlayer.videoHeight;
+                videoWidth = myPlayer.videoWidth;
+                clientHeight = myPlayer.clientHeight;
+                clientWidth = myPlayer.clientWidth;
+                V = this;
+                videoLoad = true;
+            })
+
+            loadModel();
+        }
+
+        // 载入模型文件
+        function loadModel() {
+            if (modelLoad) {
+                return;
+            }
+
+            // Load the model.
+            modelPromise.then(model => {
+                var showBox = document.getElementById("showBox");
+                showBox.innerHTML = "载入成功";
+                myModel = model;
+                detectImage();
+                modelLoad = true;
+            });
+
+        }
+
+        // 识别图片,并在页面展示
+        function detectImage() {
+
+            var showBox = document.getElementById("showBox");
+            showBox.innerHTML = "识别中...";
+
+            if (videoLoad) {
+
+                // 准备用于识别的样本
+                var sample = tf.stack([
+                    tf.div(tf.cast(tf.browser.fromPixels(V), 'float32'), 255)
+                ])
+
+                // 获取到识别的结果
+                let output = (myModel.predict(sample));
+
+                // 
+                output = output.map(feats =>
+                    feats.reshape(feats.shape.slice(1))
+                )
+
+                var boxes = yoloEval(
+                    output,
+                    tf.tensor1d(anchors).reshape([-1, 2]),
+                    COCO_CLASSESS.length,
+                    [videoHeight, videoWidth]
+                )
+
+                boxes.then(myBoxes => {
+
+                    showBox.innerHTML = "识别完毕";
+                    var $imgbox = document.getElementById('img-box');
+                    $imgbox.innerHTML = "";
+
+                    myBoxes.forEach(box => {
+
+                        var $div = document.createElement('div');
+                        $div.className = 'rect';
+
+                        var heightScale = (clientHeight / videoHeight);
+                        var widthScale = (clientWidth / videoWidth);
+                        var transformTop = box.top * heightScale;
+                        var transformLeft = box.left * widthScale;
+                        var transformWidth = box.width * widthScale;
+                        var transformHeight = box.height * heightScale;
+
+                        $div.style.top = transformTop + 'px';
+                        $div.style.left = transformLeft + 'px';
+                        $div.style.width = transformWidth + 'px';
+                        $div.style.height = transformHeight + 'px';
+                        $div.innerHTML = `<span class='className'>${box.classes} ${box.scores}</span>`;
+
+                        $imgbox.appendChild($div);
+                    })
+
+                    setTimeout(function () {
+                        detectImage();
+                    }, 10);
+
+                })
+
+            }
+
+        }
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,276 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>Home</title>
+<link rel="icon" href="/static/images/ico1.ico" type ="image/x-icon">
+
+{% comment %} form表单引入 {% endcomment %}
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<link rel="stylesheet" href="/static/assets/css/style.css">
+<link rel="stylesheet" href="/static/assets/css/font-awesome.css">
+
+<link href="/static/css/bootstrap.css" rel='stylesheet' type='text/css' />
+<!--jQuery (necessary for Bootstrap's JavaScript plugins)-->
+<script src="/static/js/jquery.min.js"></script>
+ <!-- Custom Theme files -->
+<link href="/static/css/style.css" rel='stylesheet' type='text/css' />
+<!--Custom Theme files-->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+ <!--start-smoth-scrolling-->
+<script type="text/javascript" src="/static/js/move-top.js"></script>
+<script type="text/javascript" src="/static/js/easing.js"></script>
+
+		
+		<script type="text/javascript">
+			jQuery(document).ready(function($) {
+				$(".scroll").click(function(event){		
+					event.preventDefault();
+					$('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
+				});
+			});
+		</script>
+<!--start-smoth-scrolling-->
+
+
+<style>
+		.panel-title {
+			margin: 8px;
+		}
+
+		table {
+			margin: 50px 0;
+			height: 20px;
+		}
+
+		#table_body td {
+			text-align: center;
+			vertical-align: middle;
+		}
+
+
+</style>
+
+</head>
+<body>
+<!--header-->
+	<div class="header">
+		<div class="container">
+			<!--logo-->
+			<div class="header-top">
+				<div class="logo">
+					<a href="http://127.0.0.1:8000/index"><img src="/static/images/logo1.png" /></a> 
+					
+					
+						<font  color="#737373" size="5px"> <b>  &#8195;&#8195;&#8195;基于物联网技术的盲人守护系统的设计与实现 -- 系统管理页面 </font> 
+					
+				</div>
+			<!--top-nav-->
+				<div class="top-icons">
+					<ul>
+						<li><a class="twitter" href="https://cbxg999.gitee.io/"  target="_blank"><span> </span></a></li>
+						<li><a class="fb" href="https://flowus.cn/cbxg/share/6c6e61c8-841c-4c12-bd47-9c444ed54a09"  target="_blank"><span> </span></a></li>
+						<li><a class="rss" href="#"><span> </span></a></li>
+						<li><a class="p" href="#"><span> </span></a></li>
+						<li><a class="gp" href="#"><span> </span></a></li>
+						<li><a class="db" href="#"><span> </span></a></li>
+						<div class="clearfix"> </div>
+					</ul>
+				</div>
+				<div class="clearfix"> </div>
+			</div>
+			<div class="top-nav">
+					<span class="menu"> </span>
+					<ul>
+						<li class="active"><a href="http://127.0.0.1:8000/index">控制面板</a></li>
+						<li><a href="http://127.0.0.1:8000/about">数据展示</a></li>
+						<li ><a href="http://127.0.0.1:8000/work">图像识别</a></li>
+						<li><a href="http://127.0.0.1:8000/contact">当前位置</a></li>
+						<li  ><a href="http://127.0.0.1:8000/history">历史轨迹</a></li>
+						<li><a href="http://127.0.0.1:8000/information">更多</a></li>
+						<li><a href="http://127.0.0.1:8000/panel">测试</a></li>
+					</ul>
+				</div>
+				<div class="clearfix"> </div>
+
+				
+		<!-- script-for-menu -->
+				<script>
+					$(document).ready(function(){
+						$("span.menu").click(function(){
+							$(".top-nav ul").slideToggle(200);
+						});
+					});
+				</script>
+	<!--End-top-nav-script-->
+
+
+	<div class="clearfix"> </div>
+	</div>
+
+	
+	<div class="main-head-section">
+			<div class="container">
+				<h3>控制面板 </h3>
+			</div>
+	</div>
+
+		<!--start-video-->
+		<div id="video" class="video">
+			<div class="container">
+				<div class="video-grids">
+						<div class="col-md-5 video-grid">
+							<div class="video">
+								{% comment %} <iframe src="//www.youtube.com/embed/Zoj5QBmQBC8" frameborder="0" allowfullscreen></iframe> {% endcomment %}
+								<iframe src="/static/test.mp4" frameborder="0" allowfullscreen></iframe>
+							</div>
+						</div>
+						<div class="col-md-7 video-grid text">
+							<h2>基于物联网技术的盲人守护系统的设计与实现</h2>
+							<p>针对盲人安全以及如何提高盲人的生活质量的问题，本课题提出一种基于物联网技术的盲人守护系统。
+							该系统能够实现实时监控盲人地理位置，可以检测环境中的障碍物及类型，通过摄像头模块实现视觉辅助，震动模块及超声波传感器实现视觉缺失的指引。
+							同时该系统可以通过网页端将信息实时反馈给盲人家属，实现对盲人的安全守护。</p>
+
+						   <span>本设计是一个为盲人和其监护人开发的守护系统。具有包括以下的一些基本需求：
+							（1）盲人在外出时对于所处场景信息的感知。 <br> 
+							（2）盲人的监护者对于盲人状态的掌握，如：所处位置等。 <br> 
+							（3）及时性警报功能以便对紧急情况进行处置。 <br> </span>
+						</div>
+					<div class="clearfix"> </div>
+				</div>
+			</div>
+		</div>
+<!---/video-->
+
+
+
+ <!-- contacts 发布命令 -->
+<section class="w3l-contact-4">
+	<div class="contacts-9 section-gap">
+	  <div class="wrapper">
+		<div class="top-map">
+		  <div class="map-content-9">
+			<form action="#" method="post">
+			  {% comment %} <div style="width:1000px ;height: 350px;" class="form-top1"> {% endcomment %}
+			  <div  class="form-top1">
+				<h3 class="text-center">发送指令</h3>
+				<div  class="form-top">
+				  <div  class="form-top-righ">
+					<textarea name="num" id="w3lMessage" placeholder="Message*" required=""></textarea>
+					{% comment %} <input type="checkbox" name="xd1" id="xd1" lay-skin="switch" lay-text="1|0" checked value="1">  {% endcomment %}
+					{% comment %} <textarea name="w3lMessage" id="w3lMessage" placeholder="Message*" required=""></textarea> {% endcomment %}
+				  </div>
+				</div>
+				<div class="text-center">
+				  <button type="submit">Submit Now</button>
+				</div>
+			  </div>
+			</form>
+		  </div>
+		</div>
+	  </div>
+	</div>
+  </section>
+  <!-- //contacts -->
+
+  {% comment %} 三个复选框
+  <section class="w3l-contact-4">
+		<center>	
+ 	 		<form action="#" method="post">
+  				<input type="checkbox" name="xd1" id="xd1" lay-skin="switch" lay-text="1|0" checked value="10"> 开关1
+ 				<input type="checkbox" name="xd2" id="xd2" lay-skin="switch" lay-text="1|0" checked value="11"> 开关2
+ 				<input type="checkbox" name="xd3" id="xd3" lay-skin="switch" lay-text="1|0" checked value="12"> 开关3
+				 <br/>
+				<button clas="button1" type="submit">提交</button>
+ 	 		</form>
+		 </center>
+ </section> {% endcomment %}
+
+	<!--/header-->
+	</div>
+
+
+		{% comment %} <!--banner 题头图-->
+			<div class="banner">
+				 <div class="banner-picture">
+				 </div>
+			 </div>
+			 <div class="banner-sub-head">
+				 <div class="container">
+				 	<h1>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eu eratiuy lacus.</h1>
+				 	<div class="browse-button">
+			          			<a class="slide-btn" href="#">Browse Portfolio</a>
+			        </div>
+
+				 </div>
+			 </div>
+		<!--/End-banner-->  {% endcomment %}
+
+
+
+	
+			 
+
+
+
+
+		<div class="Ready">
+			<div class="container">
+				<div class="ready-section">
+					<div class="col-md-8 ready-text">
+								<h3>Are You Ready To Be Blown Away?</h3>	
+					</div>	
+					<div class="col-md-4 ready-button">
+								<div class="ready-button">
+				          			<a class="ready-btn" href="#"> Click Here to Find Out</a>
+				       			 </div>
+	
+					</div>
+					<div class="clearfix"> </div>  	
+				</div>
+			</div>							
+		</div>
+		<!----- /start-footer---->
+				<div class="footer">
+						<div class="container">
+							<div class="footer-content">
+								<div class="col-md-6 copy-right">
+									<p>Copyright &copy; 2023.All rights reserved. <a target="_blank" href="#"> 城北徐公 </a></p>
+
+								</div>	
+								<div class="col-md-6 copy-text">
+									<div class="footer-nav">
+										<ul>
+											<li class="active"><a href="http://127.0.0.1:8000/index">Home/</a></li>
+											<li><a href="http://127.0.0.1:8000/about">About/</a></li>
+											<li><a href="http://127.0.0.1:8000/work">Work/</a></li>
+											<li><a href="http://127.0.0.1:8000/contact">Contact</a></li>
+											<li><a href="http://127.0.0.1:8000/information">Information</a></li>
+											<li><a href="http://127.0.0.1:8000/panel">Test</a></li>
+												<div class="clearfix"> </div>
+										</ul>
+									</div>
+								</div>	
+								<div class="clearfix"> </div>  
+							</div>	
+						</div>								
+					</div>
+					<!----- //End-footer---->
+						<script type="text/javascript">
+									$(document).ready(function() {
+										/*
+										var defaults = {
+								  			containerID: 'toTop', // fading element id
+											containerHoverID: 'toTopHover', // fading element hover id
+											scrollSpeed: 1200,
+											easingType: 'linear' 
+								 		};
+										*/
+										
+										$().UItoTop({ easingType: 'easeOutQuart' });
+										
+									});
+								</script>
+					<a href="#" id="toTop" style="display: block;"> <span id="toTopHover" style="opacity: 1;"> </span></a>
+	
+</body>
+</html>

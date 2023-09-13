@@ -1,0 +1,174 @@
+{#<%@ page language="java" contentType="text/html; charset=UTF-8"  pageEncoding="UTF-8"%>#}
+{% load static %}
+<html lang="en">
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Yes!</title>
+<!-- 新 Bootstrap 核心 CSS 文件 -->
+<link href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+<!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<style>
+
+	body{
+        {#background:url("{% static 'images/bg.gif' %}");#}
+    {#background:url("../static/images/bg.gif");#}
+    background-color:LightSteelBlue  ;
+     width: 980px;
+     margin: 0 auto;
+     top: 35%;
+  /*    修改框框的相对位置↑ */
+     left: 50%;
+     position: absolute;
+     margin: -190px 0 0 -540px;
+}
+
+		div {
+			text-align: center;
+		}
+
+		.main {
+			position: relative;
+			margin-top: 10%;
+			left: 20%;
+			width: 500px;
+		}
+
+		.panel-title {
+			margin: 5px 0;
+		}
+
+		table {
+			margin: 20px 0;
+			height: 220px;
+		}
+
+		#table_body td {
+			text-align: center;
+			vertical-align: middle;
+		}
+
+/* 		logo */
+		.round_icon{
+  width: 140px;
+  height: 140px;
+  display: flex;
+  border-radius: 50%;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+ .mybb{
+ margin-right:20px;
+ }
+
+</style>
+</head>
+
+<body>
+
+		<div class="col-md-4 column">
+			<form method="post" action="http://127.0.0.1:8000/test_form/" enctype="multipart/form-data" id='uploadform'>
+				<div class="form-group">
+					<div class="col-sm-offset-2 col-sm-10">
+						<button  type="submit" class="btn btn-block btn-lg btn-primary">指令面板</button>
+					</div>
+				</div>
+			</form>
+		</div>
+
+		<div class="col-md-4 column">
+			{% comment %} <form method="post" action="http://127.0.0.1:8000/button2/" enctype="multipart/form-data" id='uploadform'> {% endcomment %}
+			<form method="post" action="http://127.0.0.1:8000/button2/"  id='uploadform'>
+				<div class="form-group">
+					<div class="col-sm-offset-2 col-sm-10">
+						{% comment %} type =submit 就会提交请求 {% endcomment %}
+						{% comment %} <button   type="submit" class="btn btn-block btn-lg btn-info">实时数据</button> {% endcomment %}
+						<button   class="btn btn-block btn-lg btn-info">实时数据</button>
+					</div>
+				</div>
+			</form>
+		</div>
+
+
+		<div class="col-md-4 column">
+			<form method="post" action="http://127.0.0.1:8000/button3/" enctype="multipart/form-data" id='uploadform'>
+				<div class="form-group">
+					<div class="col-sm-offset-2 col-sm-10">
+					{% comment %} <button   type="submit" class="btn btn-success btn-block btn-lg">取样显示</button> {% endcomment %}
+					<button    type="submit"  class="btn btn-success btn-block btn-lg">取样显示</button>
+					</div>
+				</div>
+			</form>
+		</div>
+
+
+	<div class="panel panel-primary main">
+
+		<div class="panel-heading head">
+			<h3 class="panel-title">接收面板</h3>
+		</div>
+
+		<div class="panel-body">
+			<table class="table table-hover" id='table_body'>
+				<tbody>
+					<td><b>
+						<input type="text" id="sum">
+						{% comment %} <button id="submit_1">计算</button> {% endcomment %}
+					</b></td>
+				</tbody>
+			</table>
+		</div>
+
+		<div class="panel-footer foot">
+			{% comment %} type =submit 就会提交请求 {% endcomment %}
+			{% comment %} <input class="btn btn-success"   required="required" type="submit" value="刷新"/> {% endcomment %}
+			<button class="btn btn-success" id="submit_button2">局部刷新</button>
+		</div>
+	
+	</div>
+
+
+
+{% comment %} ajax函数 {% endcomment %}
+	<script>
+		var fx1 = 0
+		$("#submit_button2").click(function () {
+			$.ajax({
+				url: '/button2_fx_ajax/',
+				type: 'post',
+				data: {
+					n1: $("#num1").val(),
+					n2: $("#num2").val()
+				},
+				success: function (data) {
+					console.log(data)
+					fx1 = data
+					$("#sum").val(data)
+				},
+			})
+		})
+	</script>
+
+
+
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,252 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width">
+    <title>轨迹回放</title>
+    <link rel="stylesheet" href="https://a.amap.com/jsapi_demos/static/demo-center/css/demo-center.css"/>
+<link rel="icon" href="/static/images/ico1.ico" type ="image/x-icon">
+<link href="/static/css/bootstrap.css" rel='stylesheet' type='text/css' />
+<!--jQuery (necessary for Bootstrap's JavaScript plugins)-->
+<script src="/static/js/jquery.min.js"></script>
+ <!-- Custom Theme files -->
+<link href="/static/css/style.css" rel='stylesheet' type='text/css' />
+<!--Custom Theme files-->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+ <!--start-smoth-scrolling-->
+<script type="text/javascript" src="/static/js/move-top.js"></script>
+<script type="text/javascript" src="/static/js/easing.js"></script>
+		
+<style>
+    html, body{
+        height: 100%;
+        width: 100%;
+    }
+    #container{
+        height: 80%;
+        width: 80%;
+        position:relative;
+		left:12%;
+		width:1800px;
+		height:600px;
+		margin-left:-200px; 
+		display: block;
+
+    }
+
+
+    .input-card .btn{
+        margin-right: 1.2rem;
+        width: 9rem;
+    }
+
+    .input-card .btn:last-child{
+        margin-right: 0;
+    }
+</style>
+
+    <script type="text/javascript">
+        jQuery(document).ready(function($) {
+            $(".scroll").click(function(event){		
+                event.preventDefault();
+                $('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
+            });
+        });
+    </script>
+<!--start-smoth-scrolling-->
+</head>
+<body>
+<!--header-->
+	<div class="header">
+		<div class="container">
+			<!--logo-->
+			<div class="header-top">
+				<div class="logo">
+					<a href="http://127.0.0.1:8000/index"><img src="/static/images/logo1.png" /></a>
+					<font  color="#477f3f" size="5px"> <b> &#8195; &#8195;&#8195;&#8195;基于物联网技术的盲人守护系统的设计与实现 -- 系统管理页面 </font> 
+				</div>
+			<!--top-nav-->
+				<div class="top-icons">
+					<ul>
+						<li><a class="twitter" href="#"><span> </span></a></li>
+						<li><a class="fb" href="#"><span> </span></a></li>
+						<li><a class="rss" href="#"><span> </span></a></li>
+						<li><a class="p" href="#"><span> </span></a></li>
+						<li><a class="gp" href="#"><span> </span></a></li>
+						<li><a class="db" href="#"><span> </span></a></li>
+						<div class="clearfix"> </div>
+					</ul>
+				</div>
+				<div class="clearfix"> </div>
+			</div>
+			<div class="top-nav">
+					<span class="menu"> </span>
+					<ul>
+						<li><a href="http://127.0.0.1:8000/index">控制面板</a></li>
+						<li ><a href="http://127.0.0.1:8000/about">数据展示</a></li>
+						<li ><a href="http://127.0.0.1:8000/work">图像识别</a></li>
+						<li ><a href="http://127.0.0.1:8000/contact">当前位置</a></li>
+                        <li class="active" ><a href="http://127.0.0.1:8000/history">历史轨迹</a></li>
+						<li><a href="http://127.0.0.1:8000/information">更多</a></li>
+						<li><a href="http://127.0.0.1:8000/panel">测试</a></li>
+                        
+					</ul>
+				</div>
+				<div class="clearfix"> </div>
+		<!-- script-for-menu -->
+				<script>
+					$(document).ready(function(){
+						$("span.menu").click(function(){
+							$(".top-nav ul").slideToggle(200);
+						});
+					});
+				</script>
+	<!--End-top-nav-script-->
+				<div class="clearfix"> </div>
+		</div>
+		<!--/header-->
+	</div>
+	<!--main-head-->
+	 <div class="main-head-section">
+		 		<div class="container">
+		 			<h3>GPS历史轨迹显示</h3>
+		 		</div>
+	</div>
+
+<!--history-->
+<div id="container"></div>
+
+<div class="input-card">
+    <h4>轨迹回放控制</h4>
+    <div class="input-item">
+        <input type="button" class="btn" value="开始动画" id="start" onclick="startAnimation()"/>
+        <input type="button" class="btn" value="暂停动画" id="pause" onclick="pauseAnimation()"/>
+    </div>
+    <div class="input-item">
+        <input type="button" class="btn" value="继续动画" id="resume" onclick="resumeAnimation()"/>
+        <input type="button" class="btn" value="停止动画" id="stop" onclick="stopAnimation()"/>
+    </div>
+</div>
+
+<script type="text/javascript" src="https://webapi.amap.com/maps?v=1.4.15&key=4e040f6823e7e9fc25752d16b33a510a"></script>
+<script>
+    var marker, lineArr =  [[ {{ jingdu0 }},{{ weidu0 }}],[ {{ jingdu1 }},{{ weidu1 }}],[ {{ jingdu2 }},{{ weidu2 }}],[ {{ jingdu3 }},{{ weidu3 }}],[ {{ jingdu4 }},{{ weidu4 }}]];
+    var map = new AMap.Map("container", {
+        resizeEnable: true,
+        center: [ {{ jingdu0 }},{{ weidu0 }}],
+        zoom: 17
+    });
+
+    marker = new AMap.Marker({
+        map: map,
+        position: [ {{ jingdu0 }},{{ weidu0 }}],
+        icon: "https://webapi.amap.com/images/car.png",
+        offset: new AMap.Pixel(-26, -13),
+        autoRotation: true,
+        angle:-90,
+    });
+
+    // 绘制轨迹
+    var polyline = new AMap.Polyline({
+        map: map,
+        path: lineArr,
+        showDir:true,
+        strokeColor: "#28F",  //线颜色
+        // strokeOpacity: 1,     //线透明度
+        strokeWeight: 6,      //线宽
+        // strokeStyle: "solid"  //线样式
+    });
+
+    var passedPolyline = new AMap.Polyline({
+        map: map,
+        // path: lineArr,
+        strokeColor: "#AF5",  //线颜色
+        // strokeOpacity: 1,     //线透明度
+        strokeWeight: 6,      //线宽
+        // strokeStyle: "solid"  //线样式
+    });
+
+
+    marker.on('moving', function (e) {
+        passedPolyline.setPath(e.passedPath);
+    });
+
+    map.setFitView();
+
+    function startAnimation () {
+        marker.moveAlong(lineArr, 200);
+    }
+
+    function pauseAnimation () {
+        marker.pauseMove();
+    }
+
+    function resumeAnimation () {
+        marker.resumeMove();
+    }
+
+    function stopAnimation () {
+        marker.stopMove();
+    }
+</script>
+<!--End-history-->
+
+		
+		<div class="Ready">
+			<div class="container">
+				<div class="ready-section">
+					<div class="col-md-8 ready-text">
+								<h3>Are You Ready To Be Blown Away?</h3>	
+					</div>	
+					<div class="col-md-4 ready-button">
+								<div class="ready-button">
+				          			<a class="ready-btn" href="#"> Click Here to Find Out</a>
+				       			 </div>
+	
+					</div>
+					<div class="clearfix"> </div>  	
+				</div>
+			</div>							
+		</div>
+		<!----- /start-footer---->
+				<div class="footer">
+						<div class="container">
+							<div class="footer-content">
+								<div class="col-md-6 copy-right">
+									<p>Copyright &copy; 2023.All rights reserved. <a target="_blank" href="#"> 城北徐公 </a></p>
+								</div>	
+								<div class="col-md-6 copy-text">
+									<div class="footer-nav">
+										<ul>
+											<li><a href="http://127.0.0.1:8000/index">Home/</a></li>
+											<li><a href="http://127.0.0.1:8000/about">About/</a></li>
+											<li><a href="http://127.0.0.1:8000/work">Work/</a></li>
+											<li class="active"><a href="http://127.0.0.1:8000/contact">Contact</a></li>
+												<div class="clearfix"> </div>
+										</ul>
+									</div>
+								</div>	
+								<div class="clearfix"> </div>  
+							</div>	
+						</div>								
+					</div>
+					<!----- //End-footer---->
+						<script type="text/javascript">
+									$(document).ready(function() {
+										/*
+										var defaults = {
+								  			containerID: 'toTop', // fading element id
+											containerHoverID: 'toTopHover', // fading element hover id
+											scrollSpeed: 1200,
+											easingType: 'linear' 
+								 		};
+										*/
+										
+										$().UItoTop({ easingType: 'easeOutQuart' });
+										
+									});
+								</script>
+					<a href="#" id="toTop" style="display: block;"> <span id="toTopHover" style="opacity: 1;"> </span></a>
+	
+</body>
+</html>

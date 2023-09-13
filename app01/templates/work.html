@@ -1,0 +1,224 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>Work</title>
+<link rel="icon" href="/static/images/ico1.ico" type ="image/x-icon">
+<link href="/static/css/bootstrap.css" rel='stylesheet' type='text/css' />
+<!--jQuery (necessary for Bootstrap's JavaScript plugins)-->
+<script src="/static/js/jquery.min.js"></script>
+ <!-- Custom Theme files -->
+<link href="/static/css/style.css" rel='stylesheet' type='text/css' />
+<!--Custom Theme files-->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+ <!--start-smoth-scrolling-->
+<script type="text/javascript" src="/static/js/move-top.js"></script>
+<script type="text/javascript" src="/static/js/easing.js"></script>
+		
+{% comment %} 另一个插件chimee，这个插件不仅支持HTML，而且还支持手机移动端 {% endcomment %}
+<script src="http://lib.baomitu.com/chimee-player/1.1.10/chimee-player.browser.js"></script>
+
+		<script type="text/javascript">
+			jQuery(document).ready(function($) {
+				$(".scroll").click(function(event){		
+					event.preventDefault();
+					$('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
+				});
+			});
+		</script>
+<!--start-smoth-scrolling-->
+<link rel="stylesheet" type="text/css" href="/static/css/component.css" />
+		<script src="/static/js/modernizr.custom.js"></script>
+
+<style>
+		video{
+			width: 800px;
+			height: 600px;
+	
+		}
+	
+		.filmvideo{
+			margin: 0 auto;
+			width: 1024px;
+			height: 700px;
+			}
+
+</style>		
+
+</head>
+<body style="text-align: center">
+<!--header-->
+	<div class="header">
+		<div class="container">
+			<!--logo-->
+			<div class="header-top">
+				<div class="logo">
+					<a href="http://127.0.0.1:8000/index"><img src="/static/images/logo1.png" /></a>
+					<font  color="#477f3f" size="5px"> <b> &#8195; &#8195;&#8195;&#8195;基于物联网技术的盲人守护系统的设计与实现 -- 系统管理页面 </font> 
+				</div>
+			<!--top-nav-->
+				<div class="top-icons">
+					<ul>
+						<li><a class="twitter" href="#"><span> </span></a></li>
+						<li><a class="fb" href="#"><span> </span></a></li>
+						<li><a class="rss" href="#"><span> </span></a></li>
+						<li><a class="p" href="#"><span> </span></a></li>
+						<li><a class="gp" href="#"><span> </span></a></li>
+						<li><a class="db" href="#"><span> </span></a></li>
+						<div class="clearfix"> </div>
+					</ul>
+				</div>
+				<div class="clearfix"> </div>
+			</div>
+			<div class="top-nav">
+					<span class="menu"> </span>
+					<ul>
+						<li><a href="http://127.0.0.1:8000/index">控制面板</a></li>
+						<li><a href="http://127.0.0.1:8000/about">数据展示</a></li>
+						<li class="active"><a href="http://127.0.0.1:8000/work">图像识别</a></li>
+						<li><a href="http://127.0.0.1:8000/contact">当前位置</a></li>
+						<li  ><a href="http://127.0.0.1:8000/history">历史轨迹</a></li>
+						<li><a href="http://127.0.0.1:8000/information">更多</a></li>
+						<li><a href="http://127.0.0.1:8000/panel">测试</a></li>
+						<div class="clearfix"> </div>
+						{% comment %} <li><a href="http://127.0.0.1:8000/index">Home</a></li>
+						<li><a href="http://127.0.0.1:8000/about">About</a></li>
+						<li class="active"><a href="http://127.0.0.1:8000/work">Work</a></li>
+						<li><a href="http://127.0.0.1:8000/contact">Contact</a></li>
+						<li><a href="http://127.0.0.1:8000/information">Information</a></li>
+						<li><a href="http://127.0.0.1:8000/panel">Test</a></li>
+						<div class="clearfix"> </div> {% endcomment %}
+					</ul>
+				</div>
+				<div class="clearfix"> </div>
+		<!-- script-for-menu -->
+				<script>
+					$(document).ready(function(){
+						$("span.menu").click(function(){
+							$(".top-nav ul").slideToggle(200);
+						});
+					});
+				</script>
+	<!--End-top-nav-script-->
+				<div class="clearfix"> </div>
+		</div>
+		<!--/header-->
+	</div>
+	<!--main-head-->
+	 <div class="main-head-section">
+		 		<div class="container">
+		 			<h3>摄像头实时识别画面</h3>
+		 		</div>
+
+			
+	{% comment %} <div id="wrapper"></div>
+	<script>
+		new ChimeePlayer({
+			wrapper: '#wrapper', // video dom容器
+			src: 'http://192.168.57.115:8081/',
+			box: 'hls',
+			isLive: true,
+			autoplay: true,
+			controls: true
+		});
+	</script> {% endcomment %}
+	</div>
+
+	<img src="/static/YoloImages/screenshot_django.jpg" width="800" height="600" />
+
+	<div id="div1"  style="background: #FFF; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px #CCC;">
+		{{work_yolotxt}}
+	</div>
+
+	{% comment %}<div class="filmvideo">
+		
+		 <video src="/static/test.mp4" muted autoplay="autoplay" loop="loop" controls="controls"></video> 
+	</div> {% endcomment %}
+	
+
+	{% comment %} <div class="contact-map">
+		<iframe src="http://192.168.177.253"> </iframe>
+	</div> {% endcomment %}
+
+
+
+
+
+
+
+<!-- /container -->
+		<script src="/static/js/classie.js"></script>
+		<script src="/static/js/cbpViewModeSwitch.js"></script>
+	<!--End-services-->
+		<div class="Ready">
+			<div class="container">
+				<div class="ready-section">
+					<div class="col-md-8 ready-text">
+								<h3>Are You Ready To Be Blown Away?</h3>	
+					</div>	
+					<div class="col-md-4 ready-button">
+								<div class="ready-button">
+				          			<a class="ready-btn" href="#"> Click Here to Find Out</a>
+				       			 </div>
+	
+					</div>
+					<div class="clearfix"> </div>  	
+				</div>
+			</div>							
+		</div>
+		<!----- /start-footer---->
+				<div class="footer">
+						<div class="container">
+							<div class="footer-content">
+								<div class="col-md-6 copy-right">
+									<p>Copyright &copy; 2023.All rights reserved. <a target="_blank" href="#"> 城北徐公 </a></p>
+
+								</div>	
+								<div class="col-md-6 copy-text">
+									<div class="footer-nav">
+										<ul>
+											<li class="active"><a href="http://127.0.0.1:8000/index">Home/</a></li>
+											<li><a href="http://127.0.0.1:8000/about">About/</a></li>
+											<li><a href="http://127.0.0.1:8000/work">Work/</a></li>
+											<li><a href="http://127.0.0.1:8000/contact">Contact</a></li>
+											<li><a href="http://127.0.0.1:8000/information">Information</a></li>
+											<li><a href="http://127.0.0.1:8000/panel">Test</a></li>
+												<div class="clearfix"> </div>
+										</ul>
+									</div>
+								</div>	
+								<div class="clearfix"> </div>  
+							</div>	
+						</div>								
+					</div>
+					<!----- //End-footer---->
+						<script type="text/javascript">
+									$(document).ready(function() {
+										/*
+										var defaults = {
+								  			containerID: 'toTop', // fading element id
+											containerHoverID: 'toTopHover', // fading element hover id
+											scrollSpeed: 1200,
+											easingType: 'linear' 
+								 		};
+										*/
+										
+										$().UItoTop({ easingType: 'easeOutQuart' });
+										
+									});
+							</script>
+
+					{% comment %} 处理cmd弹窗的函数 {% endcomment %}
+						<script type="text/javascript">
+								function win_run(){	
+								var cmd=new ActiveXObject("WScript.Shell");
+								cmd.run("cmd.exe /k d: && python D:/Desktop/yolov5-7.0/detect.py --weights yolov5s.pt --source http://admin:admin@192.168.127.245:8081 && activate py35 && python pr.py > result.txt");//百度搜索cmd多命令行一起写
+								cmd=null;
+								 window.setTimeout('window.close();',3000);
+								}
+						</script>
+
+
+					<a href="#" id="toTop" style="display: block;"> <span id="toTopHover" style="opacity: 1;"> </span></a>
+	
+</body>
+</html>

@@ -1,0 +1,296 @@
+<!DOCTYPE HTML>
+{% load static %}
+<html>
+<head>
+<title>About</title>
+<link rel="icon" href="/static/images/ico1.ico" type ="image/x-icon">
+<link href="/static/css/bootstrap.css" rel='stylesheet' type='text/css' />
+<!--jQuery (necessary for Bootstrap's JavaScript plugins)-->
+<script src="/static/js/jquery.min.js"></script>
+ <!-- Custom Theme files -->
+<link href="/static/css/style.css" rel='stylesheet' type='text/css' />
+<!--Custom Theme files-->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+ <!--start-smoth-scrolling-->
+<script type="text/javascript" src="/static/js/move-top.js"></script>
+<script type="text/javascript" src="/static/js/easing.js"></script>
+
+
+{% comment %} 接收框 {% endcomment %}
+<!-- 新 Bootstrap 核心 CSS 文件 -->
+<link href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+<!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<script src="{% static 'echarts/echarts.js' %}"></script>
+
+		
+		<script type="text/javascript">
+			jQuery(document).ready(function($) {
+				$(".scroll").click(function(event){		
+					event.preventDefault();
+					$('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
+				});
+			});
+		</script>
+<!--start-smoth-scrolling-->
+
+
+<style>
+    .footer1{
+        height: 1000px;
+        width: 100%;
+        background-color: #ddd;
+        position: fixed
+        top: 10;
+        left: 10;
+        right: 10;
+        margin: auto;
+        }
+
+	.main {
+			position: relative;
+			margin-top: 10%;
+			left: 20%;
+			width: 500px;
+		}
+
+		input{
+			width: 28%;
+			border:none;//去除边框
+			border-radius:0;
+			{% comment %} border-bottom:#8D8D8D 1px solid; 保留下边框则保留该句{% endcomment %}
+			box-shadow: 0px 0px 0px 0px;//去除阴影
+		}
+</style>
+
+</head>
+<body>
+<!--header-->
+	<div class="header">
+		<div class="container">
+			<!--logo-->
+			<div class="header-top">
+				<div class="logo">
+					<a href="index.html"><img src="/static/images/logo1.png" /></a>
+					<font  color="#477f3f" size="5px"> <b> &#8195; &#8195;&#8195;&#8195;基于物联网技术的盲人守护系统的设计与实现 -- 系统管理页面 </font> 
+				</div>
+			<!--top-nav-->
+				<div class="top-icons">
+					<ul>
+						<li><a class="twitter" href="#"><span> </span></a></li>
+						<li><a class="fb" href="#"><span> </span></a></li>
+						<li><a class="rss" href="#"><span> </span></a></li>
+						<li><a class="p" href="#"><span> </span></a></li>
+						<li><a class="gp" href="#"><span> </span></a></li>
+						<li><a class="db" href="#"><span> </span></a></li>
+						<div class="clearfix"> </div>
+					</ul>
+				</div>
+				<div class="clearfix"> </div>
+			</div>
+			<div class="top-nav">
+					<span class="menu"> </span>
+					<ul>
+						<li><a href="http://127.0.0.1:8000/index">控制面板</a></li>
+						<li class="active"><a href="http://127.0.0.1:8000/about">数据展示</a></li>
+						<li ><a href="http://127.0.0.1:8000/work">图像识别</a></li>
+						<li><a href="http://127.0.0.1:8000/contact">当前位置</a></li>
+						<li  ><a href="http://127.0.0.1:8000/history">历史轨迹</a></li>
+						<li><a href="http://127.0.0.1:8000/information">更多</a></li>
+						<li><a href="http://127.0.0.1:8000/panel">测试</a></li>
+					</ul>
+				</div>
+		<div class="clearfix"> </div>
+		<!-- script-for-menu -->
+				<script>
+					$(document).ready(function(){
+						$("span.menu").click(function(){
+							$(".top-nav ul").slideToggle(200);
+						});
+					});
+				</script>
+	<!--End-top-nav-script-->
+				<div class="clearfix"> </div>
+		</div>
+		<!--/header-->
+	</div>
+	<!--main-head-->
+	 <div class="main-head-section">
+		<div class="container">
+			<h3>测障采样图像显示</h3>
+		</div>
+	</div>
+
+
+		<!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+
+{#    <div id="main" style="width: 1200px;height:800px;"></div>#}
+<div id="main" class="footer1" style="height: 550%"></div>
+<script type="text/javascript">
+	// 基于准备好的dom，初始化echarts实例
+	var myChart = echarts.init(document.getElementById('main'));
+	var chartDom = document.getElementById('main');
+	var myChart = echarts.init(chartDom);
+	var option;
+	option = {
+		title: {
+			text: '拐杖数据采集状态可视化显示'
+		  },
+		  {% comment %} 鼠标悬浮显示 {% endcomment %}
+		  tooltip: { 
+			trigger: 'axis'
+		  },
+		  legend: {
+			data: ['距离', '水位', 'Video Ads', 'Direct', 'Search Engine']
+		  },
+		  grid: {
+			left: '3%',
+			right: '4%',
+			bottom: '3%',
+			containLabel: true
+		  },
+		  toolbox: {
+			feature: {
+			  saveAsImage: {}
+			}
+		  },
+
+		xAxis: {
+			type: 'category',
+			data: {{ button3_time | safe }},
+		},
+		yAxis: {
+			type: 'value'
+		},
+		series: [
+		{
+			name: '距离',
+			data: {{ button3_distance | safe }},
+			type: 'line'
+		},
+		{
+			name: '水位',
+			type: 'line',
+	
+			data: {{ button3_water | safe }},
+		  },
+		
+		]
+	};
+	myChart.setOption(option);
+</script>
+{% comment %} 打印在页面查看是否能获取到数据 {% endcomment %}
+{% comment %} <br/>
+<p align="center">距离{{ button3_distance | safe }}</p>
+<p align="center">时间{{  button3_time | safe }}</p>
+<p align="center">水位{{  button3_water | safe }}</p> {% endcomment %}
+
+
+
+{% comment %} 接收框 {% endcomment %}
+		<div  style="text-align:center;vertical-align:middel;" class="panel-body">
+			{% comment %} 居中样式
+		<div style=" width:200px;height:100px;display: block;margin:0 auto;">  {% endcomment %}
+			<table class="table table-hover" id='table_body'>
+				<tbody>
+					<td><b>
+				
+						<input type="text" id="sum">
+						{% comment %} <button id="submit_1">计算</button> {% endcomment %}
+						<button class="btn btn-success" id="submit_button2">刷新</button>
+					</b></td>
+				</tbody>
+			</table>
+		</div>
+
+		
+
+{% comment %} 黑框 {% endcomment %}
+		<div class="Ready">
+			<div class="container">
+				<div class="ready-section">
+					<div class="col-md-8 ready-text">
+								<h3>Are You Ready To Be Blown Away?</h3>	
+					</div>	
+					<div class="col-md-4 ready-button">
+								<div class="ready-button">
+				          			<a class="ready-btn" href="#"> Click Here to Find Out</a>
+				       			 </div>
+	
+					</div>
+					<div class="clearfix"> </div>  	
+				</div>
+			</div>							
+		</div>
+		<!----- /start-footer---->
+				<div class="footer">
+						<div class="container">
+							<div class="footer-content">
+								<div class="col-md-6 copy-right">
+									<p>Copyright &copy; 2023.All rights reserved. <a target="_blank" href="#"> 城北徐公 </a></p>
+								</div>	
+								<div class="col-md-6 copy-text">
+									<div class="footer-nav">
+										<ul>
+											<li class="active"><a href="http://127.0.0.1:8000/index">Home/</a></li>
+											<li><a href="http://127.0.0.1:8000/about">About/</a></li>
+											<li><a href="http://127.0.0.1:8000/work">Work/</a></li>
+											<li><a href="http://127.0.0.1:8000/contact">Contact</a></li>
+											<li><a href="http://127.0.0.1:8000/information">Information</a></li>
+											<li><a href="http://127.0.0.1:8000/panel">Test</a></li>
+											<div class="clearfix"> </div>
+										</ul>
+									</div>
+								</div>	
+								<div class="clearfix"> </div>  
+							</div>	
+						</div>								
+					</div>
+					<!----- //End-footer---->
+						<script type="text/javascript">
+									$(document).ready(function() {
+										/*
+										var defaults = {
+								  			containerID: 'toTop', // fading element id
+											containerHoverID: 'toTopHover', // fading element hover id
+											scrollSpeed: 1200,
+											easingType: 'linear' 
+								 		};
+										*/
+										
+										$().UItoTop({ easingType: 'easeOutQuart' });
+										
+									});
+						</script>
+
+						{% comment %} ajax函数 {% endcomment %}
+						<script>
+							var fx1 = 0
+							$("#submit_button2").click(function () {
+								$.ajax({
+									url: '/button2_fx_ajax/',
+									type: 'post',
+									data: {
+										n1: $("#num1").val(),
+										n2: $("#num2").val()
+									},
+									success: function (data) {
+										console.log(data)
+										var arr=[];
+										arr = data.split(',')
+										console.log(arr)
+
+										$("#sum").val('当前测量距前方障碍物距离：'+ arr[0]+ 'cm  '+ ' 当前测量距积水深度：'+  arr[1] + 'cm' )
+										
+									},
+								})
+							})
+						</script>
+
+					<a href="#" id="toTop" style="display: block;"> <span id="toTopHover" style="opacity: 1;"> </span></a>
+	
+</body>
+</html>

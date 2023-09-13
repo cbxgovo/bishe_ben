@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title></title>
+
+    {% comment %} ajax 的jquery实现方式 引入jquery {% endcomment %}
+    <script src="/static/js/jquery.min.js"></script>
+  </head>
+  <body>
+    <input type="text" id="num1" />+<input type="text" id="num2" /> {% comment
+    %} =<input type="text" id="sum" /> {% endcomment %}
+    <input type="text" id="sum" />
+    <button id="submit_1">计算结果</button>
+
+    <script>
+      var fx1 = 0;
+      $("#submit_1").click(function () {
+        $.ajax({
+          url: "/test_ajax_fx/",
+          type: "post",
+          data: {
+            n1: $("#num1").val(),
+            n2: $("#num2").val(),
+          },
+          success: function (data) {
+            console.log(data);
+            fx1 = data;
+            $("#sum").val(data);
+          },
+        });
+      });
+    </script>
+  </body>
+</html>

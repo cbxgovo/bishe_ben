@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+ 
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>currentaddress</title>
+</head>
+<body>
+    <p id="demo">获取当前位置</p>
+    <button onclick="getLocation()">定位当前位置</button>
+    <script>
+    var x = document.getElementById("demo");
+    function getLocation() {
+        if (navigator.geolocation) {
+            navigator.geolocation.watchPosition(showPosition)
+			<!-- 通过HTML5的watchPosition()方法，不仅可以返回用户的当前位置，而且可以继续返回用户移动时的更新位置，从而实现类似GPS定位系统一样的功能。 -->
+        }
+        else {
+            x.innerHTML="该浏览器不支持获取地理位置。"
+        }
+ 
+    }
+    function showPosition(position) {
+        x.innerHTML = "纬度为：" + position.coords.latitude + "    经度为：  " + position.coords.longitude;
+    }
+    </script>
+</body>
+</html>

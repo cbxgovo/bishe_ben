@@ -1,0 +1,184 @@
+{#<%@ page language="java" contentType="text/html; charset=UTF-8"  pageEncoding="UTF-8"%>#}
+{% load static %}
+<html lang="en">
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Yes!</title>
+<!-- 新 Bootstrap 核心 CSS 文件 -->
+<link href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+<!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<style>
+
+	body{
+    {#background:url("{% static 'images/bg.gif' %}");#}
+    {#background:url("../static/images/bg.gif");#}
+    background-color:LightSteelBlue  ;
+     width: 980px;
+     margin: 0 auto;
+     top: 35%;
+  /*    修改框框的相对位置↑ */
+     left: 50%;
+     position: absolute;
+     margin: -190px 0 0 -540px;
+}
+
+		div {
+			text-align: center;
+		}
+
+		.main {
+			position: relative;
+			margin-top: 10%;
+			left: 20%;
+			width: 500px;
+		}
+
+		.panel-title {
+			margin: 5px 0;
+		}
+
+		table {
+			margin: 20px 0;
+			height: 220px;
+		}
+
+		#table_body td {
+			text-align: center;
+			vertical-align: middle;
+		}
+
+/* 		logo */
+		.round_icon{
+  width: 140px;
+  height: 140px;
+  display: flex;
+  border-radius: 50%;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+ .mybb{
+ margin-right:20px;
+ }
+
+
+</style>
+</head>
+
+<body>
+
+<div class="col-md-4 column">
+			<form method="post" action="http://127.0.0.1:8000/index3/" enctype="multipart/form-data" id='uploadform'>
+
+				<div class="form-group">
+					<div class="col-sm-offset-2 col-sm-10">
+				<button   type="submit" class="btn btn-block btn-lg btn-primary">指令面板</button>
+					</div>
+				</div>
+			</form>
+		</div>
+
+<div class="col-md-4 column">
+			<form method="post" action="http://127.0.0.1:8000/button2/" enctype="multipart/form-data" id='uploadform'>
+
+				<div class="form-group">
+					<div class="col-sm-offset-2 col-sm-10">
+						 <button   type="submit" class="btn btn-block btn-lg btn-info">实时数据</button>
+					</div>
+				</div>
+			</form>
+		</div>
+
+<div class="col-md-4 column">
+			<form method="post" action="http://127.0.0.1:8000/button3/" enctype="multipart/form-data" id='uploadform'>
+
+				<div class="form-group">
+					<div class="col-sm-offset-2 col-sm-10">
+					<button   type="submit" class="btn btn-success btn-block btn-lg">取样显示</button>
+					</div>
+				</div>
+			</form>
+		</div>
+
+
+<div id="logo" style="position:absolute;top:0px;left:0px;">
+</div>
+<img src="{% static 'images/xiaoxin.jpg' %}" class="round_icon" alt="#">
+
+
+<div  style="height: 100%   class="##">
+  <p class="lead">This is a simple mqtt test page</p>
+  <hr class="my-4">
+</div>
+
+	<div class="panel panel-primary main">
+
+		<div class="panel-heading head">
+			<h3 class="panel-title">发布面板</h3>
+		</div>
+
+		<form method="post" >
+{#            django多一个验证机制 这里不写也行   在settings里面注释掉#}
+{#            这里写了就是form表单多了一个隐藏的提交表单 有这个发送的post请求才能成功#}
+            {% csrf_token %}
+
+			<div class="panel-body">
+				<table class="table table-hover" id='table_body'>
+					<tbody>
+
+					<tr>
+							<td><b>键入on：打开LED</b></td>
+							<td><b>键入off：关闭LED</b></td>
+						</tr>
+
+
+						<tr>
+							<td><b>发布内容填充:</b></td>
+							<td><input type="text" placeholder="请输入指令" name="num"  class="form-control" ></td>
+						</tr>
+
+					<tr>
+						<button  class="btn btn-success"   type="submit"  value="1"  name="on">Turn on</button>
+						<button class="btn btn-dark"  type="submit"   value="0"   name="off">Turn off</button>
+						</tr>
+
+					</tbody>
+				</table>
+			</div>
+			<div class="panel-footer foot">
+			<input class="btn btn-success"   required="required" type="submit" value="提交"/>
+			<!-- 	<button type="button" class="btn btn-success"
+					onclick="f('uploadform')">提交</button> -->
+			</div>
+		</form>
+	</div>
+
+
+<div class="jumbotron">
+<!--  3msg3是发送 -->
+     {% comment %} <p class="lead">发布成功：${msg6_1}</p> {% endcomment %}
+     <div> {{ name1 }}</div>
+</div>
+
+
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
